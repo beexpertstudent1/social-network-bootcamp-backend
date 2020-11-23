@@ -1,8 +1,8 @@
-import jwt from 'jsonwebtoken';
-import { ApolloServer } from 'apollo-server-express';
-import { PubSub } from 'apollo-server';
+import jwt from "jsonwebtoken";
+import { ApolloServer } from "apollo-server-express";
+import { PubSub } from "apollo-server";
 
-import { IS_USER_ONLINE } from '../constants/Subscriptions';
+import { IS_USER_ONLINE } from "../constants/Subscriptions";
 
 // Export pubSub instance for publishing events
 export const pubSub = new PubSub();
@@ -41,8 +41,8 @@ export const createApolloServer = (schema, resolvers, models) => {
       }
 
       let authUser;
-      if (req.headers.authorization !== 'null') {
-        const user = await checkAuthorization(req.headers['authorization']);
+      if (req.headers.authorization !== "null") {
+        const user = await checkAuthorization(req.headers["authorization"]);
         if (user) {
           authUser = user;
         }
