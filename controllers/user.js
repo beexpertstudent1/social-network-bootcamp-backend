@@ -44,6 +44,7 @@ UserController.post("/user/signup", async (req, res) => {
     res
       .status(409)
       .json({ message: `User with given ${field} already exists.` });
+    return;
   }
 
   // Empty field validation
@@ -95,6 +96,7 @@ UserController.post("/user/signup", async (req, res) => {
     "notifications",
     "post",
   ];
+
   if (frontEndPages.includes(username)) {
     res
       .status(409)
