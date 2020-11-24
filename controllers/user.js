@@ -18,13 +18,13 @@ UserController.post("/user/signin", async (req, res) => {
   ]);
 
   if (!user) {
-    res.status(404).json({ error: "User not found." });
+    res.status(404).json({ message: "User not found." });
     return;
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password);
   if (!isValidPassword) {
-    res.status(403).json({ error: "Invalid password." });
+    res.status(403).json({ message: "Invalid password." });
     return;
   }
 
