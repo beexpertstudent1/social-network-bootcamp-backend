@@ -1,10 +1,11 @@
 import cloudinary from 'cloudinary';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
+import config from "../config/config";
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET,
+  cloud_name: config.cloudinary.cloud_name,
+  api_key: config.cloudinary.api_key,
+  api_secret: config.cloudinary.secret,
 });
 
 /**
@@ -16,7 +17,7 @@ cloudinary.config({
  */
 export const uploadToCloudinary = async (stream, folder, imagePublicId) => {
   // if imagePublicId param is presented we should overwrite the image
-  const options = imagePublicId ? { public_id: imagePublicId, overwrite: true } : { public_id: `${folder}/${uuid()}` };
+  const options = imagePublicId ? { public_id: imagePublicId, overwrite: true } : { public_id: `${folder}/${uuidv4()}` };
 
   return new Promise((resolve, reject) => {
     const streamLoad = cloudinary.v2.uploader.upload_stream(options, (error, result) => {

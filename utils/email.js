@@ -1,15 +1,18 @@
 import nodemailer from 'nodemailer';
+import config from '../config/config'
 
-const { MAIL_SERVICE, MAIL_USER, MAIL_PASS } = process.env;
+const { host, user, pass } = config.email;
 
 /**
  * Creates transporter object that will help us to send emails
  */
 const transporter = nodemailer.createTransport({
-  service: MAIL_SERVICE,
+  host: host,
+  secureConnection: true, // use SSL
+  port: 465,
   auth: {
-    user: MAIL_USER,
-    pass: MAIL_PASS,
+    user: user,
+    pass: pass,
   },
 });
 
@@ -22,7 +25,7 @@ const transporter = nodemailer.createTransport({
  */
 export const sendEmail = ({ to, subject, html }) => {
   return new Promise((resolve, reject) => {
-    const options = { from: MAIL_USER, to, subject, html };
+    const options = { from: 'BeExpert <no-reply@beexpertonline.com', to, subject, html };
 
     return transporter
       .sendMail(options)

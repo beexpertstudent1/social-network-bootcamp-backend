@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { ApolloServer } from "apollo-server-express";
 import { PubSub } from "apollo-server";
-
+import config from "../config/config"
 import { IS_USER_ONLINE } from "../constants/Subscriptions";
 
 // Export pubSub instance for publishing events
@@ -15,7 +15,7 @@ export const pubSub = new PubSub();
 const checkAuthorization = (token) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const authUser = await jwt.verify(token, process.env.SECRET);
+      const authUser = await jwt.verify(token, config.secret);
       if (authUser) {
         resolve(authUser);
       } else {

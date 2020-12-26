@@ -2,7 +2,7 @@ import express from "express";
 import models from "../models";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generate-token";
-
+import config from "../config/config";
 const { User } = models;
 
 const UserController = express.Router();
@@ -29,7 +29,7 @@ UserController.post("/user/signin", async (req, res) => {
   }
 
   res.json({
-    token: generateToken(user, process.env.SECRET, AUTH_TOKEN_EXPIRY),
+    token: generateToken(user, config.secert, AUTH_TOKEN_EXPIRY),
   });
 });
 
@@ -119,7 +119,7 @@ UserController.post("/user/signup", async (req, res) => {
   }).save();
 
   res.json({
-    token: generateToken(newUser, process.env.SECRET, AUTH_TOKEN_EXPIRY),
+    token: generateToken(newUser, config.secert, AUTH_TOKEN_EXPIRY),
   });
 });
 

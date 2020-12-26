@@ -7,6 +7,7 @@ import { generateToken } from "../utils/generate-token";
 import { sendEmail } from "../utils/email";
 import { pubSub } from "../utils/apollo-server";
 
+import config from "../config/config";
 import { IS_USER_ONLINE } from "../constants/Subscriptions";
 
 const AUTH_TOKEN_EXPIRY = "1y";
@@ -337,7 +338,7 @@ const Mutation = {
     }
 
     return {
-      token: generateToken(user, process.env.SECRET, AUTH_TOKEN_EXPIRY),
+      token: generateToken(user, config.secert, AUTH_TOKEN_EXPIRY),
     };
   },
   /**
@@ -418,7 +419,7 @@ const Mutation = {
     }).save();
 
     return {
-      token: generateToken(newUser, process.env.SECRET, AUTH_TOKEN_EXPIRY),
+      token: generateToken(newUser, config.secert, AUTH_TOKEN_EXPIRY),
     };
   },
   /**
@@ -436,7 +437,7 @@ const Mutation = {
     // Set password reset token and it's expiry
     const token = generateToken(
       user,
-      process.env.SECRET,
+      config.secret,
       RESET_PASSWORD_TOKEN_EXPIRY
     );
     const tokenExpiry = Date.now() + RESET_PASSWORD_TOKEN_EXPIRY;
@@ -447,7 +448,7 @@ const Mutation = {
     );
 
     // Email user reset link
-    const resetLink = `${process.env.FRONTEND_URL}/reset-password?email=${email}&token=${token}`;
+    const resetLink = `${config.frontend_url}/reset-password?email=${email}&token=${token}`;
     const mailOptions = {
       to: email,
       subject: "Password Reset",
@@ -501,7 +502,7 @@ const Mutation = {
 
     // Return success message
     return {
-      token: generateToken(user, process.env.SECRET, AUTH_TOKEN_EXPIRY),
+      token: generateToken(user, config.secret, AUTH_TOKEN_EXPIRY),
     };
   },
   /**

@@ -1,0 +1,35 @@
+{
+  "secret": "LtMw0hs+UH9eC2W2fia482C1MTP6z+riSaxbvuKlx6wEpu8OzV9HAgCczzqnyYLqf5wVoKdUY/snBd9giOxiGFpSMZuTvy0+Fkqr04CnKDnfB7AonatsC+t63Hn8m7KVvRWL08xID7jaCsbZBHcqbt+GhBfAuxS9fAdjcshibHfySCfK1VerNjYpDmriaxaSKzbhJQhyckhJ9nR+r7Kw/UCYSrB2v1soSY/p/gx8wb2Y5oJmL3u1mTwwMEW/A/59kpCyjeTViFhhAfW0IXYV3bdF2rhoGpuzfLHVUJ2g4qrBNG6fpcrd5t50hIOMvpoxKuJmFBU3zV+zmYcmZpxMBA==",
+  "frontend_url": "http://localhost:3000",
+  "mongodb": {
+    "uri": "mongodb://localhost:27017/sn-aws-bootcamp",
+    "db": "sn-aws-bootcamp",
+    "option": {
+      "useNewUrlParser": true,
+      "useCreateIndex": true,
+      "autoIndex": false,
+      "reconnectTries": 25000,
+      "reconnectInterval": 500,
+      "poolSize": 100,
+      "bufferMaxEntries": 0,
+      "connectTimeoutMS": 10000,
+      "socketTimeoutMS": 45000,
+      "family": 4
+    }
+  },
+  "port": 4000,
+  "jwt": {
+    "expiration": "60d"
+  },
+  "logLevel": "info",
+  "cloudinary": {
+    "api_key": "",
+    "secret": "",
+    "cloud_name": ""
+  },
+  "email": {
+    "host": "email-smtp.us-east-1.amazonaws.com",
+    "user": "AKIATLO2FFJ3BNCRWZ6M",
+    "pass": "BI1icPx9NxQFHnoNJO6o5ltk2GnLhg84v2nnV9v49AuV"
+  }
+}
