@@ -1,5 +1,4 @@
 source /home/ec2-user/.bash_profile
-whereis node
 
 if [ "$DEPLOYMENT_GROUP_NAME" == "sn-aws-bootcamb-BE-Live-GN" ]
 then
@@ -17,4 +16,17 @@ else
 fi
 
 # restart api service
-pm2 restart user-api
+
+# pm2 describe sn-aws-bootcamp-api > /dev/null
+pm2 describe sn-aws-bootcamp-api
+RUNNING=$?
+
+if [ "${RUNNING}" -ne 0 ]; 
+then
+    echo 'service not exist'
+    pm2 start /folders/exe/sn-aws-bootcamb/index.js --name sn-aws-bootcamp-api
+else
+    echo 'service exist and starting to reload it '
+    pm2 restart sn-aws-bootcamp-api
+fi;
+# pm2 restart user-api
