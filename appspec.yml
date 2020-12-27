@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /folders/exe/sn-aws-bootcamb
+  - source: /package.json
+    destination: /folders/configs/
+  - source: /package.json
+    destination: /folders/logs/sn-aws-bootcamb/
+permissions:
+  - object: /folders/exe/sn-aws-bootcamb
+    owner: ec2-user
+    mode: 744
+    group: ec2-user
+  #   # type:
+  #   #   - file
+hooks:
+  BeforeInstall:
+    - location: /scripts/install.sh
+      timeout: 300
+      runas: ec2-user
+  AfterInstall:
+    - location: /scripts/reload.sh
+      timeout: 180
+      runas: ec2-user
