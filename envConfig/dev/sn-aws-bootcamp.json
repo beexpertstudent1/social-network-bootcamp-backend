@@ -23,9 +23,9 @@
   },
   "logLevel": "info",
   "cloudinary": {
-    "api_key": "",
-    "secret": "",
-    "cloud_name": ""
+    "api_key": "258856679176695",
+    "secret": "DsdriG2lF16L_EQOBkTDdZOC0Xc",
+    "cloud_name": "the-tuteur"
   },
   "email": {
     "host": "email-smtp.us-east-1.amazonaws.com",
