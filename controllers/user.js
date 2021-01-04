@@ -29,7 +29,7 @@ UserController.post("/user/signin", async (req, res) => {
   }
 
   res.json({
-    token: generateToken(user, config.secert, AUTH_TOKEN_EXPIRY),
+    token: generateToken(user, config.secret, AUTH_TOKEN_EXPIRY),
   });
 });
 
