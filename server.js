@@ -38,6 +38,22 @@ app.use(bodyParser.json());
 
 app.use(UserController);
 
+const responceHeader = function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'authorization');
+  res.setHeader('Cache-Control', 'no-cache');
+
+  // Pass to next layer of middleware
+  next();
+};
+
+app.use(responceHeader);
+
+
 // Create a Apollo Server
 const server = createApolloServer(schema, resolvers, models);
 server.applyMiddleware({ app, path: "/graphql" });
