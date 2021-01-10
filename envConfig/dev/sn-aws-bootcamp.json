@@ -1,6 +1,6 @@
 {
   "secret": "LtMw0hs+UH9eC2W2fia482C1MTP6z+riSaxbvuKlx6wEpu8OzV9HAgCczzqnyYLqf5wVoKdUY/snBd9giOxiGFpSMZuTvy0+Fkqr04CnKDnfB7AonatsC+t63Hn8m7KVvRWL08xID7jaCsbZBHcqbt+GhBfAuxS9fAdjcshibHfySCfK1VerNjYpDmriaxaSKzbhJQhyckhJ9nR+r7Kw/UCYSrB2v1soSY/p/gx8wb2Y5oJmL3u1mTwwMEW/A/59kpCyjeTViFhhAfW0IXYV3bdF2rhoGpuzfLHVUJ2g4qrBNG6fpcrd5t50hIOMvpoxKuJmFBU3zV+zmYcmZpxMBA==",
-  "frontend_url": "http://localhost:3000",
+  "frontend_url": "*",
   "mongodb": {
     "uri": "mongodb://localhost:27017/sn-aws-bootcamp",
     "db": "sn-aws-bootcamp",

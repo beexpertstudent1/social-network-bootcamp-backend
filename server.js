@@ -1,10 +1,10 @@
-import { } from "dotenv/config";
+import {} from "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
-import config from "./config/config"
+import config from "./config/config";
 
 import models from "./models";
 import schema from "./schema";
@@ -38,22 +38,6 @@ app.use(bodyParser.json());
 
 app.use(UserController);
 
-const responceHeader = function (req, res, next) {
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Headers', 'authorization');
-  res.setHeader('Cache-Control', 'no-cache');
-
-  // Pass to next layer of middleware
-  next();
-};
-
-app.use(responceHeader);
-
-
 // Create a Apollo Server
 const server = createApolloServer(schema, resolvers, models);
 server.applyMiddleware({ app, path: "/graphql" });
@@ -63,7 +47,7 @@ const httpServer = createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 // Listen to HTTP and WebSocket server
-const PORT = config.port //|| process.env.API_PORT;
+const PORT = config.port; //|| process.env.API_PORT;
 httpServer.listen({ port: PORT }, () => {
   console.log(`server ready at http://localhost:${PORT}${server.graphqlPath}`);
   console.log(
