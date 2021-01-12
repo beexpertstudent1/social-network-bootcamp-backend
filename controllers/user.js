@@ -2,8 +2,9 @@ import express from "express";
 import models from "../models";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generate-token";
+import { checkAuthorizationToken } from "../utils/apollo-server";
 import config from "../config/config";
-const { User } = models;
+const { User, Message } = models;
 
 const UserController = express.Router();
 
@@ -121,6 +122,94 @@ UserController.post("/user/signup", async (req, res) => {
   res.json({
     token: generateToken(newUser, config.secert, AUTH_TOKEN_EXPIRY),
   });
+});
+
+UserController.post("/user/getAuthUser", async (req, res) => {
+  const authUser = await checkAuthorizationToken(req.headers["authorization"]);
+  if (!authUser) {
+    return res
+      .status(401)
+      .json({ message: `need a vlid token.` });;
+  }
+
+  // If user is authenticated, update it's isOnline field to true
+  const user = await User.findOneAndUpdate(
+    { email: authUser.email },
+    { isOnline: true }
+  )
+    .populate({ path: "posts", options: { sort: { createdAt: "desc" } } })
+    .populate("likes")
+    .populate("followers")
+    .populate("following")
+    .populate({
+      path: "notifications",
+      populate: [
+        { path: "author" },
+        { path: "follow" },
+        { path: "like", populate: { path: "post" } },
+        { path: "comment", populate: { path: "post" } },
+      ],
+      match: { seen: false },
+    });
+
+  user.newNotifications = user.notifications;
+
+  // Find unseen messages
+  const lastUnseenMessages = await Message.aggregate([
+    {
+      $match: {
+        receiver: mongoose.Types.ObjectId(authUser.id),
+        seen: false,
+      },
+    },
+    {
+      $sort: { createdAt: -1 },
+    },
+    {
+      $group: {
+        _id: "$sender",
+        doc: {
+          $first: "$$ROOT",
+        },
+      },
+    },
+    { $replaceRoot: { newRoot: "$doc" } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "sender",
+        foreignField: "_id",
+        as: "sender",
+      },
+    },
+  ]);
+
+  // Transform data
+  const newConversations = [];
+  lastUnseenMessages.map((u) => {
+    const user = {
+      id: u.sender[0]._id,
+      username: u.sender[0].username,
+      fullName: u.sender[0].fullName,
+      image: u.sender[0].image,
+      lastMessage: u.message,
+      lastMessageCreatedAt: u.createdAt,
+    };
+
+    newConversations.push(user);
+  });
+
+  // Sort users by last created messages date
+  const sortedConversations = newConversations.sort((a, b) =>
+    b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
+  );
+
+  // Attach new conversations to auth User
+  user.newConversations = sortedConversations;
+
+  return res
+    .status(200)
+    .json(user);
 });
 
 export default UserController;

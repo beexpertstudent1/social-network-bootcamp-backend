@@ -27,6 +27,8 @@ const checkAuthorization = (token) => {
   });
 };
 
+export const checkAuthorizationToken = checkAuthorization;
+
 /**
  * Creates an Apollo server and identifies if user is authenticated or not
  *
