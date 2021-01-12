@@ -124,12 +124,12 @@ UserController.post("/user/signup", async (req, res) => {
   });
 });
 
-UserController.post("/user/getAuthUser", async (req, res) => {
+UserController.get("/user/getAuthUser", async (req, res) => {
   const authUser = await checkAuthorizationToken(req.headers["authorization"]);
   if (!authUser) {
     return res
       .status(401)
-      .json({ message: `need a vlid token.` });;
+      .json({ message: `need a valid token.` });;
   }
 
   // If user is authenticated, update it's isOnline field to true
