@@ -156,7 +156,10 @@ UserController.get("/me", async (req, res) => {
         { path: "comment", populate: { path: "post" } },
       ],
       match: { seen: false },
-    });
+    })
+    .lean();
+
+  user.id = user._id;
 
   user.newNotifications = user.notifications;
 
