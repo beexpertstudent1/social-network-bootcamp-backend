@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { ApolloServer } from "apollo-server-express";
 import { PubSub } from "apollo-server";
-import config from "../config/config"
+import config from "../config/config";
 import { IS_USER_ONLINE } from "../constants/Subscriptions";
 
 // Export pubSub instance for publishing events

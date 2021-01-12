@@ -1,9 +1,11 @@
 import express from "express";
+import mongoose from "mongoose";
 import models from "../models";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generate-token";
 import { checkAuthorizationToken } from "../utils/apollo-server";
 import config from "../config/config";
+
 const { User, Message } = models;
 
 const UserController = express.Router();
@@ -124,12 +126,16 @@ UserController.post("/user/signup", async (req, res) => {
   });
 });
 
-UserController.get("/user/getAuthUser", async (req, res) => {
-  const authUser = await checkAuthorizationToken(req.headers["authorization"]);
-  if (!authUser) {
-    return res
-      .status(401)
-      .json({ message: `need a valid token.` });;
+UserController.get("/me", async (req, res) => {
+  let authUser;
+  try {
+    const token = req.headers["authorization"].substr("Bearer ".length);
+    authUser = await checkAuthorizationToken(token);
+    if (!authUser) {
+      return res.status(401).json({ message: `Couldn't authenticate user` });
+    }
+  } catch (e) {
+    return res.status(401).json({ message: e.message });
   }
 
   // If user is authenticated, update it's isOnline field to true
@@ -207,9 +213,7 @@ UserController.get("/user/getAuthUser", async (req, res) => {
   // Attach new conversations to auth User
   user.newConversations = sortedConversations;
 
-  return res
-    .status(200)
-    .json(user);
+  return res.status(200).json(user);
 });
 
 export default UserController;
