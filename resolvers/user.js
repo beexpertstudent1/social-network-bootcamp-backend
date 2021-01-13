@@ -547,20 +547,16 @@ const Mutation = {
       "Something went wrong while uploading image to Cloudinary."
     );
   },
-  updateUserResume: async (
-    root,
-    { input: { resume } },
-    { authUser, User }) => {
-
+  updateUserResume: async (root, { input: { resume } }, { authUser, User }) => {
     let id = authUser._id || authUser.id;
+
     const updatedUser = await User.findOneAndUpdate(
       { _id: id },
       { resume },
       { new: true }
-    )
+    );
 
     return updatedUser;
-
   },
 };
 

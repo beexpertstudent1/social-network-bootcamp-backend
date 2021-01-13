@@ -29,6 +29,7 @@ const UserSchema = gql`
     createdAt: String
     updatedAt: String
     bio: String
+    resume: String
   }
 
   type File {
@@ -79,7 +80,6 @@ const UserSchema = gql`
 
   input UpdateUserResumeInput {
     resume: String!
-    
   }
 
   # ---------------------------------------------------------
@@ -107,7 +107,7 @@ const UserSchema = gql`
     createdAt: String
     updatedAt: String
     bio: String
-    resume:String
+    resume: String
   }
 
   type UsersPayload {
@@ -163,7 +163,7 @@ const UserSchema = gql`
     uploadUserPhoto(input: UploadUserPhotoInput!): UserPayload
 
     # Update user resume
-    updateUserResume(input: UpdateUserResumeInput!):UserPayload
+    updateUserResume(input: UpdateUserResumeInput!): UserPayload
   }
 
   # ---------------------------------------------------------
