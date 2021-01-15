@@ -5,7 +5,7 @@ phases:
       nodejs: 12
   build:
     commands:
-      - yarn install
+      - npm install
 cache:
   paths:
     - "/node_modules/**/*"

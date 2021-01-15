@@ -36,6 +36,8 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => res.status(200).end());
+
 app.use(UserController);
 
 // Create a Apollo Server
