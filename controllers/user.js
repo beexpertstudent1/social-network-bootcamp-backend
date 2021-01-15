@@ -122,7 +122,7 @@ UserController.post("/user/signup", async (req, res) => {
   }).save();
 
   res.json({
-    token: generateToken(newUser, config.secert, AUTH_TOKEN_EXPIRY),
+    token: generateToken(newUser, config.secret, AUTH_TOKEN_EXPIRY),
   });
 });
 

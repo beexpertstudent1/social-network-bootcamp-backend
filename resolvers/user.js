@@ -338,7 +338,7 @@ const Mutation = {
     }
 
     return {
-      token: generateToken(user, config.secert, AUTH_TOKEN_EXPIRY),
+      token: generateToken(user, config.secret, AUTH_TOKEN_EXPIRY),
     };
   },
   /**
@@ -419,7 +419,7 @@ const Mutation = {
     }).save();
 
     return {
-      token: generateToken(newUser, config.secert, AUTH_TOKEN_EXPIRY),
+      token: generateToken(newUser, config.secret, AUTH_TOKEN_EXPIRY),
     };
   },
   /**
