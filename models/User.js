@@ -40,7 +40,6 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    bio: String,
     posts: [
       {
         type: Schema.Types.ObjectId,

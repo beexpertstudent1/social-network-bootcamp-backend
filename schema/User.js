@@ -28,7 +28,6 @@ const UserSchema = gql`
     notifications: [NotificationPayload]
     createdAt: String
     updatedAt: String
-    bio: String
   }
 
   type File {
@@ -101,7 +100,6 @@ const UserSchema = gql`
     unseenMessage: Boolean
     createdAt: String
     updatedAt: String
-    bio: String
   }
 
   type UsersPayload {

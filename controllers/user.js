@@ -37,7 +37,7 @@ UserController.post("/user/signin", async (req, res) => {
 });
 
 UserController.post("/user/signup", async (req, res) => {
-  const { fullName, email, username, password, bio } = req.body;
+  const { fullName, email, username, password } = req.body;
 
   // Check if user with given email or username already exists
   const user = await User.findOne().or([{ email }, { username }]);
@@ -52,7 +52,7 @@ UserController.post("/user/signup", async (req, res) => {
 
   // Empty field validation
   if (!fullName || !email || !username || !password) {
-    res.status(400).json({ message: "All fields are required except bio." });
+    res.status(400).json({ message: "All fields are required." });
     return;
   }
 
@@ -118,7 +118,6 @@ UserController.post("/user/signup", async (req, res) => {
     email,
     username,
     password,
-    bio,
   }).save();
 
   res.json({
