@@ -29,7 +29,6 @@ const UserSchema = gql`
     createdAt: String
     updatedAt: String
     bio: String
-    resume: String
   }
 
   type File {
@@ -78,10 +77,6 @@ const UserSchema = gql`
     isCover: Boolean
   }
 
-  input UpdateUserResumeInput {
-    resume: String!
-  }
-
   # ---------------------------------------------------------
   # Return Payloads
   # ---------------------------------------------------------
@@ -107,7 +102,6 @@ const UserSchema = gql`
     createdAt: String
     updatedAt: String
     bio: String
-    resume: String
   }
 
   type UsersPayload {
@@ -161,9 +155,6 @@ const UserSchema = gql`
 
     # Uploads user Profile or Cover photo
     uploadUserPhoto(input: UploadUserPhotoInput!): UserPayload
-
-    # Update user resume
-    updateUserResume(input: UpdateUserResumeInput!): UserPayload
   }
 
   # ---------------------------------------------------------

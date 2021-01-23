@@ -41,7 +41,6 @@ const userSchema = new Schema(
       default: false,
     },
     bio: String,
-    resume: String,
     posts: [
       {
         type: Schema.Types.ObjectId,
