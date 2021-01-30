@@ -2,13 +2,13 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /folders/exe/sn-aws-bootcamb
+    destination: /folders/exe/$APPLICATION_NAME
   - source: /package.json
     destination: /folders/configs/
   - source: /package.json
-    destination: /folders/logs/sn-aws-bootcamb/
+    destination: /folders/logs/$APPLICATION_NAME
 permissions:
-  - object: /folders/exe/sn-aws-bootcamb
+  - object: /folders/exe/$APPLICATION_NAME
     owner: ec2-user
     mode: 744
     group: ec2-user
