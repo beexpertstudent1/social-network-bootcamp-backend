@@ -41,6 +41,10 @@ export const createApolloServer = (schema, resolvers, models) => {
     typeDefs: schema,
     resolvers,
     context: async ({ req, connection }) => {
+      if (req.method === "GET") {
+        return {};
+      }
+
       if (connection) {
         return connection.context;
       }
