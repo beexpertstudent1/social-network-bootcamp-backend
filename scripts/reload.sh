@@ -23,7 +23,7 @@ if [ "${RUNNING}" -ne 0 ]; then
     echo 'service not exist'
     pm2 start /folders/exe/sn-aws-bootcamb/index.js --name sn-aws-bootcamp-api
     pm2 save
-    pm2 startup
+    pm2 startup | sh
 else
     echo 'service exist and starting to reload it '
     pm2 restart sn-aws-bootcamp-api
