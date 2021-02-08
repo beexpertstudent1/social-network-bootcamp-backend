@@ -28,4 +28,5 @@ else
     echo 'service exist and starting to reload it '
     pm2 restart sn-aws-bootcamp-api
 fi
+
 # pm2 restart user-api
